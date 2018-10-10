@@ -12,3 +12,5 @@ export function registration(state = {}, action) {
       return state
   }
 }
+
+export default registration
