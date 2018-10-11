@@ -33,7 +33,7 @@
     "dev": "concurrently --kill-others \"yarn watch-client\" \"yarn start-dev\" \"yarn start-dev-api\"",
     "start-dev": "cross-env NODE_PATH=src NODE_ENV=development PORT=3000 APIPORT=3030 WEBPACK_DLLS=1 node ./bin/server.js",
     "start-dev-api": "cross-env NODE_PATH=api NODE_ENV=development APIPORT=3030 node ./bin/api.js",
-    "watch-client": "cross-env UV_THREADPOOL_SIZE=100 NODE_PATH=src NODE_ENV=development PORT=3000 APIPORT=3030 WEBPACK_DLLS=1 node webpack/webpack-dev-server.js",
+    "watch-client": "cross-env UV_THREADPOOL_SIZE=100 NODE_PATH=src NODE_ENV=development PORT=3000 APIPORT=3030 WEBPACK_DLLS=1 node webpack/webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --colors --display-error-details --config=webpack/prod.config.js",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",
     "postinstall": "concurrently \"yarn build\" \"yarn build-dlls\"",
