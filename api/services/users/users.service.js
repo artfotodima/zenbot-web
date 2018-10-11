@@ -1,6 +1,6 @@
 import feathersNedb from 'feathers-nedb';
 import NeDB from 'nedb';
-import hooks from './hooks';
+import hooks from './users.hooks';
 
 export default function userService(app) {
   const options = {

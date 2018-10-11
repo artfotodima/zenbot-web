@@ -1,6 +1,6 @@
 import authentication from './authentication';
 import custom from './custom';
-import users from './users';
+import users from './users/users.service';
 import messages from './messages';
 
 export default function services(app) {
