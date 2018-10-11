@@ -121,7 +121,7 @@ class App extends Component {
           <Navbar.Collapse>
             <Nav navbar>
               <LinkContainer to="/chat">
-                <NavItem>Chat</NavItem>
+                <NavItem>Backfill</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem>About Us</NavItem>
@@ -150,15 +150,15 @@ class App extends Component {
                 <strong>{user.email}</strong>
               </p>
             )}
-            <Nav navbar pullRight>
-              <NavItem
-                target="_blank"
-                title="View on Github"
-                href="https://github.com/bertho-zero/react-redux-universal-hot-example"
-              >
-                <i className="fa fa-github" />
-              </NavItem>
-            </Nav>
+            {user && (
+              <Nav navbar pullRight>
+                <LinkContainer to="/settings">
+                  <NavItem className="logout-link" onClick={this.handleLogout}>
+                    Settings
+                  </NavItem>
+                </LinkContainer>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Navbar>
 
