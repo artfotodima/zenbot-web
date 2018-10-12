@@ -20,7 +20,6 @@ import { trigger } from 'redial';
 import { getStoredState } from 'redux-persist';
 import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage';
 import Cookies from 'cookies';
-import config from 'config';
 import createStore from 'redux/create';
 import apiClient from 'helpers/apiClient';
 import Html from 'helpers/Html';
@@ -29,6 +28,7 @@ import { createApp } from 'app';
 import { getChunks, waitChunks } from 'utils/chunks';
 import asyncMatchRoutes from 'utils/asyncMatchRoutes';
 import { ReduxAsyncConnect, Provider } from 'components';
+import config from './config';
 
 const pretty = new PrettyError();
 const chunksPath = path.join(__dirname, '..', 'static', 'dist', 'loadable-chunks.json');

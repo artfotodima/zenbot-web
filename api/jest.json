@@ -1,0 +1,7 @@
+{
+  "verbose": false,
+  "testEnvironment" : "node",
+  "transformIgnorePatterns": [
+    "node_modules/(?!(src|my-project|react-native-button)/)"
+  ]
+}

@@ -121,7 +121,7 @@ class App extends Component {
           <Navbar.Collapse>
             <Nav navbar>
               <LinkContainer to="/chat">
-                <NavItem>Backfill</NavItem>
+                <NavItem>Chat</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem>About Us</NavItem>
@@ -153,7 +153,7 @@ class App extends Component {
             {user && (
               <Nav navbar pullRight>
                 <LinkContainer to="/settings">
-                  <NavItem className="logout-link" onClick={this.handleLogout}>
+                  <NavItem>
                     Settings
                   </NavItem>
                 </LinkContainer>

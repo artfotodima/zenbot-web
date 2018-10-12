@@ -18,14 +18,14 @@ const config = {
     title: 'Zenbot',
     description: 'All the modern best practices in one example.',
     head: {
-      titleTemplate: 'React Redux Example: %s',
+      titleTemplate: 'Zenbot: %s',
       meta: [
         { name: 'description', content: 'All the modern best practices in one example.' },
         { charset: 'utf-8' },
-        { property: 'og:site_name', content: 'React Redux Example' },
+        { property: 'og:site_name', content: 'Zenbot strategies' },
         { property: 'og:image', content: 'https://react-redux.herokuapp.com/logo.jpg' },
         { property: 'og:locale', content: 'en_US' },
-        { property: 'og:title', content: 'React Redux Example' },
+        { property: 'og:title', content: 'Zenbot strategies' },
         { property: 'og:description', content: 'All the modern best practices in one example.' },
         { property: 'og:card', content: 'summary' },
         { property: 'og:site', content: '@erikras' },

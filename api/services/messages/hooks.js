@@ -4,12 +4,8 @@ import { restrictToOwner } from 'feathers-authentication-hooks';
 import {
   fastJoin, disallow, iff, isProvider, keep
 } from 'feathers-hooks-common';
-import { required } from 'utils/validation';
-import { validateHook as validate } from 'hooks';
-
-const schemaValidator = {
-  text: required
-};
+import feathersErrors from '@feathersjs/errors';
+import _ from 'lodash';
 
 function joinResolvers(context) {
   const { app } = context;
@@ -26,6 +22,23 @@ function joinResolvers(context) {
   };
 }
 
+function validate() {
+  return context => {
+    const { data } = context;
+
+    const Validator = require('feathers-validator');
+    const validator = new Validator(data, {
+      text: 'required'
+    });
+    const errors = validator.errors();
+
+    if (!_.isEmpty(errors)) {
+      throw new feathersErrors.BadRequest('Incomplete oauth registration', errors);
+    }
+    return context;
+  };
+}
+
 const joinAuthor = [
   fastJoin(joinResolvers, {
     author: true
@@ -39,7 +52,7 @@ const messagesHooks = {
     find: [],
     get: [],
     create: [
-      validate(schemaValidator),
+      validate(),
       context => {
         const { data, params } = context;
 

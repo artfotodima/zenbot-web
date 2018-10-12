@@ -1,0 +1,53 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "auth": {
+    "secret": "super secret",
+    "cookie": {
+      "enabled": true,
+      "httpOnly": false,
+      "maxAge": 86400000,
+      "secure": true
+    },
+    "facebook": {
+      "path": "/auth/facebook",
+      "clientID": "635147529978862",
+      "clientSecret": "28c16a4effa4a5f1371924e4dd12c8cd",
+      "permissions": {
+        "authType": "rerequest"
+      },
+      "scope": ["public_profile", "email"],
+      "profileFields": ["id", "displayName", "photos", "email", "first_name", "last_name", "age_range"],
+      "accessTokenField": "accessToken"
+    }
+  },
+  "authentication": {
+    "secret": "1ec8fcaa5291a427ab156bb8b3c8811dc88209b7f56b22e7f1dac5f847a97cd20f588dbec5e62e47f00ca4f1152b501991a9e5620328d3f339672f0975a3e4a88bcf219a5516c39906905ca1d3107455deec1452f12162d2f6e798db0f4153e0329ae17e82008d706b665c292fa701345e61f66c76a372921d8f95f533838927876394b8c35dc693dfb09e6d1eea8fef1f7093f1277740e24984374740fe8c038537d69f48a99fb3d94e828cbbdb3bfb557c12d46dc35575ede1d8826cae03775343b7b23ecfb2c605f6e088508f9032fc9dfc6e465abe4934ee96e5ca485e014ede345dc47b32a49788107b2c52e6684b07c0005d4f88c809fceaebc1ee218c",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
+}

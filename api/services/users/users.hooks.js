@@ -1,28 +1,40 @@
 import auth from '@feathersjs/authentication';
 import local from '@feathersjs/authentication-local';
-import errors from '@feathersjs/errors';
+import feathersErrors from '@feathersjs/errors';
 import { restrictToOwner } from 'feathers-authentication-hooks';
 import { discard } from 'feathers-hooks-common';
-import { validateHook } from 'hooks';
-import {
-  required, email, match, unique
-} from 'utils/validation';
+import _ from 'lodash';
 
-const schemaValidator = {
-  email: [required, email, unique('email')],
-  password: required,
-  password_confirmation: [required, match('password')]
-};
+function unique(field) {
+  return async (value, data, { hook }) => {
+    const result = await hook.service.find({ query: { [field]: value } });
+    if (result.total !== 0) {
+      throw new Error('Already exist');
+    }
+  };
+}
 
 function validate() {
   return context => {
     const { data } = context;
 
     if (data.facebook && !data.email) {
-      throw new errors.BadRequest('Incomplete oauth registration', data);
+      throw new feathersErrors.BadRequest('Incomplete oauth registration', data);
     }
 
-    return validateHook(schemaValidator)(context);
+    const Validator = require('feathers-validator');
+    const validator = new Validator(data, {
+      email: 'required|email',
+      password: 'required|min:6|confirmed',
+      password_confirmation: 'required|min:6'
+    });
+    unique(data.email);
+    const errors = validator.errors();
+
+    if (!_.isEmpty(errors)) {
+      throw new feathersErrors.BadRequest('Incomplete oauth registration', errors);
+    }
+    return context;
   };
 }
 
@@ -49,7 +61,19 @@ const userHooks = {
     ]
   },
   after: {
+    // Make sure the password field is never sent to the client
+    // Always must be the last hook
     all: local.hooks.protect('password'),
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  error: {
+    all: [],
     find: [],
     get: [],
     create: [],
